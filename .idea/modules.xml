@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rabbitSolu.iml" filepath="$PROJECT_DIR$/rabbitSolu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitsever/rabbitsever.iml" filepath="$PROJECT_DIR$/rabbitsever/rabbitsever.iml" />
+    </modules>
+  </component>
+</project>
