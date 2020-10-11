@@ -8,6 +8,7 @@ import com.chao.rabbitSolu.model.CustomerLogin;
 import com.chao.rabbitSolu.service.CustomerInfService;
 import com.chao.rabbitSolu.service.CustomerLoginService;
 import com.chao.rabbitSolu.util.DateUtil;
+import com.chao.rabbitSolu.util.MD5Util;
 import com.chao.rabbitSolu.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class CustomerLoginServiceImpl implements CustomerLoginService{
     private CustomerInfService customerInfService;
     public void addCustomer(CustomerLogin customerLogin){
         Long customerId = uuidUtil.customerIdGenerator();
+        String passwordEncode = MD5Util.encode(customerLogin.getPassword());
+        customerLogin.setPassword(passwordEncode);
         customerLogin.setCustomerId(customerId);
         customerLoginDao.save(customerLogin);
         /*初始化用户资料*/
