@@ -2,8 +2,6 @@ package com.chao.rabbitSolu.model;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @ToString
@@ -15,7 +13,6 @@ import javax.persistence.Id;
 @Entity
 public class CustomerLogin {
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
   private Long customerId;
   private String loginName;
   private String password;

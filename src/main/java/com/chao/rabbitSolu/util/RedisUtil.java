@@ -2,8 +2,6 @@ package com.chao.rabbitSolu.util;
 
 import com.chao.rabbitSolu.config.RedisConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 

@@ -22,6 +22,7 @@ public class LoginController {
     private CustomerLoginService customerLoginService;
     @PostMapping("/login")
     public void login(@RequestParam String user, @RequestParam String password){
+
             rabbitTemplate.convertAndSend("logChange", "logBinding", "qqqqqq", new CorrelationData("2121212121"));
 
     }
