@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Time 2020/10/8 17:29
  * @Version 0.1
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages ={"com.chao.rabbitSolu"})
 public class RabbitApplication {
     public static void main(String[] args) {
         SpringApplication.run(RabbitApplication.class);
