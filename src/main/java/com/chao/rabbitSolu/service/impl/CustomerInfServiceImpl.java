@@ -43,7 +43,15 @@ public class CustomerInfServiceImpl implements CustomerInfService{
      */
     @Override
     public void updateCustomerInf(CustomerInf customerInf) {
-
+        Long customerInfId = customerInf.getCustomerInfId();
+        Long identityCardType = customerInf.getIdentityCardType();
+        String identityCardNo = customerInf.getIdentityCardNo();
+        String mobilePhone = customerInf.getCustomerName();
+        String customerEmail = customerInf.getCustomerEmail();
+        String gender = customerInf.getGender();
+        Timestamp birthday = customerInf.getBirthday();
+        Timestamp modifyTime = customerInf.getModifiedTime();
+        customerInfDao.updateCustomerInf(customerInfId,identityCardType,identityCardNo,mobilePhone,customerEmail,gender,birthday,modifyTime);
     }
 
 }

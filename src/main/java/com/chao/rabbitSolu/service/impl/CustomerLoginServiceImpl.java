@@ -37,7 +37,7 @@ public class CustomerLoginServiceImpl implements CustomerLoginService{
         customerLogin.setCustomerId(customerId);
         customerLoginDao.save(customerLogin);
         /*初始化用户资料*/
-        customerInfService.initCustomerInf(customerId,customerLogin.getLoginName());;
+        customerInfService.initCustomerInf(customerId,customerLogin.getLoginName());
 
     }
 }
