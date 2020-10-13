@@ -1,6 +1,8 @@
 package com.chao.rabbitSolu.service;
 
 import com.chao.rabbitSolu.model.OrderCart;
+import com.chao.rabbitSolu.model.OrderDetail;
+import com.chao.rabbitSolu.model.OrderMaster;
 
 /**
  * @ClassName OrderCartService 购物车
@@ -20,7 +22,7 @@ public interface OrderCartService {
      * 下单逻辑
      * 下单检查目前库存，调用支付接口，超时未支付自动取消
      */
-    void placeOrder(OrderCart orderCart);
+    void placeOrder(OrderDetail orderDetail, OrderMaster orderMaster);
 
     /**
      * 超时取消或者下单后取消

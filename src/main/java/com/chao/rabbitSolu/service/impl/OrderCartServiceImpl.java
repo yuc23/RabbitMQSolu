@@ -1,19 +1,30 @@
 package com.chao.rabbitSolu.service.impl;
 
+import com.chao.rabbitSolu.config.RedisConfig;
+import com.chao.rabbitSolu.dao.OrderCartDao;
 import com.chao.rabbitSolu.model.OrderCart;
+import com.chao.rabbitSolu.model.OrderDetail;
+import com.chao.rabbitSolu.model.OrderMaster;
 import com.chao.rabbitSolu.service.OrderCartService;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * @ClassName${Class_NAME}
+ * @ClassName OrderCartServiceImpl
  * @Author chao
  * @Time 2020/10/12 22:37
  * @Version 0.1
  **/
 @Service
 public class OrderCartServiceImpl implements OrderCartService {
-
+    @Autowired
+    private RedisConfig redisConfig;
+    @Autowired
+    private OrderCartDao orderCartDao;
     /**
      * 商品添加购物车使用缓存，添加是否下单状态
      *
@@ -22,6 +33,12 @@ public class OrderCartServiceImpl implements OrderCartService {
     @Override
     public void addGoodsIntoOrderCart(OrderCart orderCart) {
 
+        RedisTemplate redisTemplate = redisConfig.getRedisTemplate();
+        //入缓存
+        redisTemplate.opsForValue().set(orderCart.getCustomerId(),orderCart,1L, TimeUnit.DAYS);
+        //入库
+        orderCartDao.save(orderCart);
+
     }
 
     /**
@@ -29,10 +46,13 @@ public class OrderCartServiceImpl implements OrderCartService {
      * 下单逻辑
      * 下单检查目前库存，锁定资源，调用支付接口，超时未支付自动取消
      *
-     * @param orderCart
+     * @param orderDetail
+     * @param orderMaster
      */
     @Override
-    public void placeOrder(OrderCart orderCart) {
+    public void placeOrder(OrderDetail orderDetail,OrderMaster orderMaster) {
+        //锁定资源，先减库存。
+        Long catagoryId = orderDetail.getProductId();
 
     }
 
