@@ -15,8 +15,8 @@ import java.util.List;
  **/
 @Repository
 public interface WarehouseProductDao extends JpaRepository<WarehouseProduct,Long>{
-    @Query(value = "update warehouse_product set lock_cnt =:lockCnt where product_id =:productId",nativeQuery = true)
-    void updateProductLockCnt(Long productId,Long lockCnt);
-    @Query(value = "SELECT w_id,current_cnt,lock_cnt from warehouse_product where product_id = :productId")
-    List selectStockFromProductId(Long productId);
+    @Query(value = "update warehouse_product set lock_cnt =lock_cnt+1 where product_id =:productId AND w_id =:wId",nativeQuery = true)
+    void updateProductLockCnt(Long productId,Long wId);
+    @Query(value = "SELECT * from warehouse_product where product_id = :productId",nativeQuery = true)
+    List<WarehouseProduct> selectStockFromProductId(Long productId);
 }

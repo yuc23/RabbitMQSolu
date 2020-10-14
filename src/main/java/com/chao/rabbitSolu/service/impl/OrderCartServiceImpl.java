@@ -1,16 +1,20 @@
 package com.chao.rabbitSolu.service.impl;
 
+import com.chao.rabbitSolu.bo.WarehouseProductBO;
 import com.chao.rabbitSolu.config.RedisConfig;
 import com.chao.rabbitSolu.dao.OrderCartDao;
+import com.chao.rabbitSolu.dao.WarehouseProductDao;
 import com.chao.rabbitSolu.model.OrderCart;
 import com.chao.rabbitSolu.model.OrderDetail;
 import com.chao.rabbitSolu.model.OrderMaster;
 import com.chao.rabbitSolu.service.OrderCartService;
+import com.chao.rabbitSolu.service.WarehouseProductService;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,6 +29,10 @@ public class OrderCartServiceImpl implements OrderCartService {
     private RedisConfig redisConfig;
     @Autowired
     private OrderCartDao orderCartDao;
+    @Autowired
+    private WarehouseProductService warehouseProductService;
+    @Autowired
+    private WarehouseProductDao warehouseProductDao;
     /**
      * 商品添加购物车使用缓存，添加是否下单状态
      *
@@ -52,8 +60,13 @@ public class OrderCartServiceImpl implements OrderCartService {
     @Override
     public void placeOrder(OrderDetail orderDetail,OrderMaster orderMaster) {
         //锁定资源，先减库存。
-        Long catagoryId = orderDetail.getProductId();
+        Long productId = orderDetail.getProductId();
+        //根据库房策略选库房
+        WarehouseProductBO warehouseProductBO = warehouseProductService.selectStock(productId,orderMaster.getProvince(),orderMaster.getCity(),orderMaster.getDistrict());
+        if (warehouseProductBO.isStock()){
 
+        }
+        warehouseProductDao.updateProductLockCnt(productId,warehouseProductBO.getSelectedWId());
     }
 
     /**

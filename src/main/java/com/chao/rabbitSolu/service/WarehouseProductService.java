@@ -16,5 +16,5 @@ public interface WarehouseProductService {
      * @param productId
      * @return
      */
-    WarehouseProductBO selectStock(Long productId);
+    WarehouseProductBO selectStock(Long productId, Long provinceCode, Long cityCode, Long district);
 }

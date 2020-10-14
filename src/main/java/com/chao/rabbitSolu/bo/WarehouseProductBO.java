@@ -1,6 +1,5 @@
 package com.chao.rabbitSolu.bo;
 
-import com.chao.rabbitSolu.model.WarehouseProduct;
 import lombok.*;
 
 /**
@@ -23,5 +22,5 @@ public class WarehouseProductBO {
     /**
      *
      */
-    private WarehouseProduct selectedWarehouse;
+    private Long selectedWId;
 }
